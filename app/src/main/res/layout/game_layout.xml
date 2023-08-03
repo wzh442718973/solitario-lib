@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".BaseGame" >
+    tools:context=".Game" >
 
     <LinearLayout
         android:id="@+id/slotWinning"
@@ -25,28 +25,28 @@
             android:splitMotionEvents="false"
             android:weightSum="4" >
 
-            <com.xklakoux.solitariolib.CellPile
+            <com.xklakoux.freecell.CellPile
                 android:id="@+id/slotPile0"
                 style="@style/winSlotPiles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <com.xklakoux.solitariolib.CellPile
+            <com.xklakoux.freecell.CellPile
                 android:id="@+id/slotPile1"
                 style="@style/winSlotPiles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <com.xklakoux.solitariolib.CellPile
+            <com.xklakoux.freecell.CellPile
                 android:id="@+id/slotPile2"
                 style="@style/winSlotPiles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <com.xklakoux.solitariolib.CellPile
+            <com.xklakoux.freecell.CellPile
                 android:id="@+id/slotPile3"
                 style="@style/winSlotPiles"
                 android:layout_width="wrap_content"
@@ -63,28 +63,28 @@
             android:splitMotionEvents="false"
             android:weightSum="4" >
 
-            <com.xklakoux.solitariolib.FoundationPile
+            <com.xklakoux.freecell.FoundationPile
                 android:id="@+id/winningPile0"
                 style="@style/winSlotPiles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <com.xklakoux.solitariolib.FoundationPile
+            <com.xklakoux.freecell.FoundationPile
                 android:id="@+id/winningPile1"
                 style="@style/winSlotPiles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <com.xklakoux.solitariolib.FoundationPile
+            <com.xklakoux.freecell.FoundationPile
                 android:id="@+id/winningPile2"
                 style="@style/winSlotPiles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <com.xklakoux.solitariolib.FoundationPile
+            <com.xklakoux.freecell.FoundationPile
                 android:id="@+id/winningPile3"
                 style="@style/winSlotPiles"
                 android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
             android:splitMotionEvents="false"
             android:weightSum="8" >
 
-            <com.xklakoux.solitariolib.Pile
+            <com.xklakoux.freecell.Pile
                 android:id="@+id/pile0"
                 style="@style/piles"
                 android:layout_width="fill_parent"
@@ -116,7 +116,7 @@
                 android:layout_weight="1"
                 android:paddingRight="@dimen/card_side_margin_half" />
 
-            <com.xklakoux.solitariolib.Pile
+            <com.xklakoux.freecell.Pile
                 android:id="@+id/pile1"
                 style="@style/piles"
                 android:layout_width="fill_parent"
@@ -125,7 +125,7 @@
                 android:paddingLeft="@dimen/card_side_margin_half"
                 android:paddingRight="@dimen/card_side_margin_half" />
 
-            <com.xklakoux.solitariolib.Pile
+            <com.xklakoux.freecell.Pile
                 android:id="@+id/pile2"
                 style="@style/piles"
                 android:layout_width="fill_parent"
@@ -134,7 +134,7 @@
                 android:paddingLeft="@dimen/card_side_margin_half"
                 android:paddingRight="@dimen/card_side_margin_half" />
 
-            <com.xklakoux.solitariolib.Pile
+            <com.xklakoux.freecell.Pile
                 android:id="@+id/pile3"
                 style="@style/piles"
                 android:layout_width="fill_parent"
@@ -143,7 +143,7 @@
                 android:paddingLeft="@dimen/card_side_margin_half"
                 android:paddingRight="@dimen/card_side_margin_half" />
 
-            <com.xklakoux.solitariolib.Pile
+            <com.xklakoux.freecell.Pile
                 android:id="@+id/pile4"
                 style="@style/piles"
                 android:layout_width="fill_parent"
@@ -152,7 +152,7 @@
                 android:paddingLeft="@dimen/card_side_margin_half"
                 android:paddingRight="@dimen/card_side_margin_half" />
 
-            <com.xklakoux.solitariolib.Pile
+            <com.xklakoux.freecell.Pile
                 android:id="@+id/pile5"
                 style="@style/piles"
                 android:layout_width="fill_parent"
@@ -161,7 +161,7 @@
                 android:paddingLeft="@dimen/card_side_margin_half"
                 android:paddingRight="@dimen/card_side_margin_half" />
 
-            <com.xklakoux.solitariolib.Pile
+            <com.xklakoux.freecell.Pile
                 android:id="@+id/pile6"
                 style="@style/piles"
                 android:layout_width="fill_parent"
@@ -170,7 +170,7 @@
                 android:paddingLeft="@dimen/card_side_margin_half"
                 android:paddingRight="@dimen/card_side_margin_half" />
 
-            <com.xklakoux.solitariolib.Pile
+            <com.xklakoux.freecell.Pile
                 android:id="@+id/pile7"
                 style="@style/piles"
                 android:layout_width="fill_parent"
@@ -191,7 +191,7 @@
         android:textSize="40sp"
         android:visibility="invisible" />
 
-    <com.xklakoux.solitariolib.Deck
+    <com.xklakoux.freecell.Deck
         android:id="@+id/deck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

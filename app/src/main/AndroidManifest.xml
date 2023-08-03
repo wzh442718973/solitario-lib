@@ -1,21 +1,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xklakoux.solitariolib">
+    package="com.xklakoux.freecell"
+    >
 
 
     <application
+        android:name=".Game"
         android:allowBackup="true"
-        android:name="com.xklakoux.solitariolib.Game"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <activity android:name=".GameActivity" android:exported="true">
+        <activity
+            android:exported="true"
+            android:name=".GameActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsDialog"/>
+        <activity
+            android:name=".SettingsDialog"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" >
+        </activity>
     </application>
-
 </manifest>
