@@ -8,11 +8,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.preference.PreferenceManager;
-import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.core.view.MotionEventCompat;
 
 import com.xklakoux.solitariolib.R;
 import com.xklakoux.solitariolib.SettingsConstant;

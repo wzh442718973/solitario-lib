@@ -55,7 +55,7 @@ import com.xklakoux.solitariolib.views.Stock;
  * @author artur
  * 
  */
-public abstract class BaseGameActivity extends Activity implements OnSharedPreferenceChangeListener{
+public class GameActivity extends Activity implements OnSharedPreferenceChangeListener{
 
 	protected SharedPreferences prefs;
 
@@ -90,7 +90,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 
 	static List<BasePile> tableauPiles;
 
-	private Stock stock;
+	private Deck stock;
 	private ScrollView scrollPiles;
 	private LinearLayout piles;
 	private RelativeLayout hollowPile;
@@ -115,10 +115,18 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 	}
 
 
-	protected abstract List<BasePile> getFoundationPiles();
-	protected abstract List<BasePile> getTableauPiles();
-	protected abstract List<BasePile> getDeck();
-	protected abstract List<BasePile> getCellPiles();
+	protected  List<BasePile> getFoundationPiles(){
+		return null;
+	};
+	protected  List<BasePile> getTableauPiles(){
+		return null;
+	};
+	protected  List<BasePile> getDeck(){
+		return null;
+	};
+	protected  List<BasePile> getCellPiles(){
+		return null;
+	};
 
 
 
@@ -130,24 +138,22 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 		statsLayout = (RelativeLayout) findViewById(R.id.stats);
 
 
-		tableauPiles = getTableauPiles();
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile0));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile1));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile2));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile3));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile4));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile5));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile6));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile7));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile8));
-		//		tableauPiles.add((BasePile) findViewById(R.id.pile9));
+		tableauPiles = 	new ArrayList<>();//getTableauPiles();
+				tableauPiles.add((BasePile) findViewById(R.id.pile0));
+				tableauPiles.add((BasePile) findViewById(R.id.pile1));
+				tableauPiles.add((BasePile) findViewById(R.id.pile2));
+				tableauPiles.add((BasePile) findViewById(R.id.pile3));
+				tableauPiles.add((BasePile) findViewById(R.id.pile4));
+				tableauPiles.add((BasePile) findViewById(R.id.pile5));
+				tableauPiles.add((BasePile) findViewById(R.id.pile6));
+				tableauPiles.add((BasePile) findViewById(R.id.pile7));
 
 		int i=0;
 		for(BasePile pile: tableauPiles) {
 			pile.setTag(i++);
 		}
 
-		stock = (Stock) findViewById(R.id.deck);
+		stock = (Deck) findViewById(R.id.deck);
 		stock.setOnClickListener(new OnDeckClickListener());
 		stock.setSize(cardWidth, cardHeight);
 
@@ -206,7 +212,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 		private boolean cardsCorrect() {
 			for (BasePile pile : tableauPiles) {
 				if (pile.getCardsCount() < 1) {
-					Toast.makeText(BaseGameActivity.this, R.string.all_tableaus_should_be_filled, Toast.LENGTH_SHORT)
+					Toast.makeText(GameActivity.this, R.string.all_tableaus_should_be_filled, Toast.LENGTH_SHORT)
 					.show();
 					return false;
 				}
@@ -221,11 +227,11 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 
 		int[] deckLocation = new int[2];
 		stock.getLastVisible().getLocationOnScreen(deckLocation);
-		int statusBarOffsetY = Utils.getStatusBarOffset(BaseGameActivity.this, root);
+		int statusBarOffsetY = Utils.getStatusBarOffset(GameActivity.this, root);
 
 		int[] location = new int[2];
 		pile.getLastTrueChild().getLocationOnScreen(location);
-		final Card fakeCard = new Card(BaseGameActivity.this, Suit.SPADES, Rank.ACE);
+		final Card fakeCard = new Card(GameActivity.this, Suit.SPADES, Rank.ACE);
 		root.addView(fakeCard);
 		setCardSize(fakeCard);
 		fakeCard.setOnTouchListener(null);
@@ -397,7 +403,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 	private void dealNewGame() {
 		Game.setState(GameState.DEALING);
 		for (int k = 0; k < Game.START_CARDS_DEAL_COUNT; k++) {
-			BasePile pile = tableauPiles.get(k % 10);
+			BasePile pile = tableauPiles.get(k % 8);
 
 			Card card = stock.getCard();
 
@@ -449,7 +455,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 	}
 
 	private void showRulesDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(BaseGameActivity.this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 		builder.setMessage(R.string.rules_of_spider);
 		builder.setTitle(R.string.spider_solitaire_rules);
 		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -518,7 +524,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 		for (BasePile pileLayout : tableauPiles) {
 			pileLayout.removeViews(1, pileLayout.getCardsCount());
 		}
-		stock.initialize(chosenDifficulty, BaseGameActivity.this);
+		stock.initialize(chosenDifficulty, GameActivity.this);
 		dealNewGame();
 		Game.getStatsManager().setTimeZero();
 	}
@@ -550,7 +556,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 			Game.getStatsManager().updatePoints(StatsManager.SET_UNDID);
 
 			for (Rank num : Rank.values()) {
-				Card card = new Card(BaseGameActivity.this, move.getSuit(), num);
+				Card card = new Card(GameActivity.this, move.getSuit(), num);
 				card.setFaceup(true);
 				draggedParent.addCard(card);
 			}
@@ -629,7 +635,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 
 
 	private void showNewGameDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(BaseGameActivity.this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 		builder.setMessage(R.string.current_progress_will_be_lost_message);
 		builder.setTitle(R.string.start_new_game_alert_dialog_title);
 		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -651,7 +657,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 	}
 
 	private void restartGameDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(BaseGameActivity.this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
 		builder.setMessage(R.string.current_progress_will_be_lost_message);
 		builder.setTitle(R.string.restart_game_alert_dialog_title);
 		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -689,7 +695,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 			params.addRule(RelativeLayout.BELOW, 0);
 			scrollPiles.setLayoutParams(params);
 
-			hollowPile.setVisibility(View.INVISIBLE);
+//			hollowPile.setVisibility(View.INVISIBLE);
 			piles.setWeightSum(11f);
 
 			params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -710,7 +716,7 @@ public abstract class BaseGameActivity extends Activity implements OnSharedPrefe
 			params.addRule(RelativeLayout.BELOW, stock.getId());
 			scrollPiles.setLayoutParams(params);
 
-			hollowPile.setVisibility(View.GONE);
+//			hollowPile.setVisibility(View.GONE);
 			piles.setWeightSum(10f);
 
 			params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
